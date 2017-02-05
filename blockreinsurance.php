@@ -35,12 +35,9 @@ class Blockreinsurance extends Module
 	public function __construct()
 	{
 		$this->name = 'blockreinsurance';
-		if (version_compare(_PS_VERSION_, '1.4.0.0') >= 0)
-			$this->tab = 'front_office_features';
-		else
-			$this->tab = 'Blocks';
-		$this->version = '2.2.0';
-		$this->author = 'PrestaShop';
+		$this->tab = 'front_office_features';
+		$this->version = '3.0.0';
+		$this->author = 'thirty bees';
 
 		$this->bootstrap = true;
 		parent::__construct();	
