@@ -42,7 +42,7 @@ class Blockreinsurance extends Module
 		$this->bootstrap = true;
 		parent::__construct();	
 
-		$this->displayName = $this->l('Customer reassurance block');
+		$this->displayName = $this->l('Block Customer Reassurance');
 		$this->description = $this->l('Adds an information block aimed at offering helpful information to reassure customers that your store is trustworthy.');
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
