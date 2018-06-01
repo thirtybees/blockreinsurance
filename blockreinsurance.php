@@ -1,29 +1,27 @@
 <?php
-/*
-* 2007-2015 PrestaShop
-*
-* NOTICE OF LICENSE
-*
-* This source file is subject to the Academic Free License (AFL 3.0)
-* that is bundled with this package in the file LICENSE.txt.
-* It is also available through the world-wide-web at this URL:
-* http://opensource.org/licenses/afl-3.0.php
-* If you did not receive a copy of the license and are unable to
-* obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2015 PrestaShop SA
-
-*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
-*/
+/**
+ * Copyright (C) 2017-2018 thirty bees
+ * Copyright (C) 2007-2015 PrestaShop SA
+ *
+ * thirty bees is an extension to the PrestaShop software by PrestaShop SA.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@thirtybees.com so we can send you a copy immediately.
+ *
+ * @author    thirty bees <modules@thirtybees.com>
+ * @author    PrestaShop SA <contact@prestashop.com>
+ * @copyright 2017-2018 thirty bees
+ * @copyright 2007-2015 PrestaShop SA
+ * @license   Academic Free License (AFL 3.0)
+ * PrestaShop is an internationally registered trademark of PrestaShop SA.
+ */
 
 if (!defined('_CAN_LOAD_FILES_'))
 	exit;
@@ -40,7 +38,7 @@ class Blockreinsurance extends Module
 		$this->author = 'thirty bees';
 
 		$this->bootstrap = true;
-		parent::__construct();	
+		parent::__construct();
 
 		$this->displayName = $this->l('Block Customer Reassurance');
 		$this->description = $this->l('Adds an information block aimed at offering helpful information to reassure customers that your store is trustworthy.');
@@ -56,7 +54,7 @@ class Blockreinsurance extends Module
 			// Disable on mobiles and tablets
 			$this->disableDevice(Context::DEVICE_TABLET | Context::DEVICE_MOBILE);
 	}
-	
+
 	public function installDB()
 	{
 		$return = true;
@@ -67,7 +65,7 @@ class Blockreinsurance extends Module
 				`file_name` VARCHAR(100) NOT NULL,
 				PRIMARY KEY (`id_reinsurance`)
 			) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8 ;');
-		
+
 		$return &= Db::getInstance()->execute('
 			CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'reinsurance_lang` (
 				`id_reinsurance` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -75,7 +73,7 @@ class Blockreinsurance extends Module
 				`text` VARCHAR(300) NOT NULL,
 				PRIMARY KEY (`id_reinsurance`, `id_lang`)
 			) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8 ;');
-		
+
 		return $return;
 	}
 
@@ -145,7 +143,7 @@ class Blockreinsurance extends Module
 				$reinsurance = new reinsuranceClass();
 			$reinsurance->copyFromPost();
 			$reinsurance->id_shop = $this->context->shop->id;
-			
+
 			if ($reinsurance->validateFields(false) && $reinsurance->validateFieldsLang(false))
 			{
 				$reinsurance->save();
@@ -166,7 +164,7 @@ class Blockreinsurance extends Module
 			else
 				$html .= '<div class="conf error">'.$this->l('An error occurred while attempting to save.').'</div>';
 		}
-		
+
 		if (Tools::isSubmit('updateblockreinsurance') || Tools::isSubmit('addblockreinsurance'))
 		{
 			$helper = $this->initForm();
@@ -175,7 +173,7 @@ class Blockreinsurance extends Module
 				{
 					$reinsurance = new reinsuranceClass((int)$id_reinsurance);
 					$helper->fields_value['text'][(int)$lang['id_lang']] = $reinsurance->text[(int)$lang['id_lang']];
-				}	
+				}
 				else
 					$helper->fields_value['text'][(int)$lang['id_lang']] = Tools::getValue('text_'.(int)$lang['id_lang'], '');
 			if ($id_reinsurance = Tools::getValue('id_reinsurance'))
@@ -183,7 +181,7 @@ class Blockreinsurance extends Module
 				$this->fields_form[0]['form']['input'][] = array('type' => 'hidden', 'name' => 'id_reinsurance');
 				$helper->fields_value['id_reinsurance'] = (int)$id_reinsurance;
  			}
-				
+
 			return $html.$helper->generateForm($this->fields_form);
 		}
 		else if (Tools::isSubmit('deleteblockreinsurance'))
@@ -348,7 +346,7 @@ class Blockreinsurance extends Module
 			array('text' => $this->l('Free Shipping.'), 'file_name' => 'reinsurance-4-1.jpg'),
 			array('text' => $this->l('100% secure payment processing.'), 'file_name' => 'reinsurance-5-1.jpg')
 		);
-		
+
 		foreach($tab_texts as $tab)
 		{
 			$reinsurance = new reinsuranceClass();
