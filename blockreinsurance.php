@@ -44,6 +44,7 @@ class Blockreinsurance extends Module
 		$this->displayName = $this->l('Block Customer Reassurance');
 		$this->description = $this->l('Adds an information block aimed at offering helpful information to reassure customers that your store is trustworthy.');
 		$this->tb_versions_compliancy = '> 1.0.0';
+		$this->tb_min_version = '1.0.0';
 		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
