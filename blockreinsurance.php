@@ -53,9 +53,7 @@ class Blockreinsurance extends Module
 		return parent::install() &&
 			$this->installDB() &&
 			Configuration::updateValue('BLOCKREINSURANCE_NBBLOCKS', 5) &&
-			$this->registerHook('footer') && $this->installFixtures() &&
-			// Disable on mobiles and tablets
-			$this->disableDevice(Context::DEVICE_TABLET | Context::DEVICE_MOBILE);
+			$this->registerHook('footer') && $this->installFixtures();
 	}
 
 	public function installDB()
